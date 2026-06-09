@@ -146,15 +146,7 @@ export function Contact() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
             variants={itemVariants}
           >
-            <motion.a
-              href="mailto:khanza@example.com"
-              className="inline-flex items-center justify-center px-8 py-3 bg-autumn-orange text-white rounded-full font-semibold hover:bg-autumn-terracotta transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Mail className="w-5 h-5 mr-2" />
-              Send Email
-            </motion.a>
+            
 
             <motion.a
               href="#portfolio"
