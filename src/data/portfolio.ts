@@ -19,7 +19,7 @@ export const portfolioData = {
     {
       id: 2,
       title: 'Portfolio Work 2',
-      image: '/portfolio/porto_8.png',
+      image: '/portfolio/porto.png',
       category: 'Graphic Design',
     },
     {
