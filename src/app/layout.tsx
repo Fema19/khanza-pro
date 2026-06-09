@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lora, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -19,12 +19,16 @@ export const metadata: Metadata = {
   description: "Premium portfolio showcasing illustration, graphic design, 3D art, and video editing.",
   keywords: ["portfolio", "design", "illustration", "graphic design", "3D art", "video editing"],
   authors: [{ name: "Khanza Azalina" }],
-  viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: "Khanza Azalina - Visual Communication Designer",
     description: "Premium portfolio showcasing illustration, graphic design, 3D art, and video editing.",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

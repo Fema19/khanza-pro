@@ -30,6 +30,7 @@ export const portfolioData = {
     },
   ],
   decorativeImages: {
+    hero: ['/portfolio/porto_1.png', '/portfolio/porto_6.png'],
     about: ['/portfolio/porto_1.png', '/portfolio/porto_2.png', '/portfolio/porto_3.png'],
     skills: ['/portfolio/porto_4.png', '/portfolio/porto_5.png', '/portfolio/porto_6.png'],
   },

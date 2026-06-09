@@ -41,7 +41,7 @@ export function Skills() {
       {/* Decorative Images */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          className="absolute top-10 right-10 w-32 h-32 rounded-full overflow-hidden opacity-20"
+          className="absolute top-10 right-10 w-32 h-32 rounded-full overflow-hidden opacity-55 shadow-xl ring-4 ring-autumn-100/70"
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
         >
@@ -54,7 +54,7 @@ export function Skills() {
           />
         </motion.div>
         <motion.div
-          className="absolute bottom-20 left-10 w-40 h-40 rounded-full overflow-hidden opacity-15"
+          className="absolute bottom-20 left-10 w-40 h-40 rounded-full overflow-hidden opacity-45 shadow-xl ring-4 ring-white/60"
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
         >
@@ -132,7 +132,7 @@ export function Skills() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-lg opacity-30 hidden lg:block">
+          <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-xl opacity-50 ring-4 ring-autumn-100 hidden lg:block">
             <Image
               src={portfolioData.decorativeImages.skills[2]}
               alt="Decorative"

@@ -8,6 +8,7 @@ import { portfolioData } from '@/data/portfolio';
 
 export function Portfolio() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const selectedWork = portfolioData.portfolio.find((work) => work.id === selectedId);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,11 +33,38 @@ export function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="py-20 md:py-32 bg-autumn-100 px-4 sm:px-6 lg:px-8"
+      className="relative overflow-hidden bg-autumn-100 px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <motion.div
-          className="text-center mb-12 md:mb-20"
+          className="absolute -left-8 top-24 hidden h-44 w-36 overflow-hidden rounded-[2rem] opacity-45 shadow-xl ring-4 ring-white/50 md:block"
+          animate={{ y: [0, 16, 0], rotate: [-4, 0, -4] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        >
+          <Image
+            src={portfolioData.decorativeImages.about[1]}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+        <motion.div
+          className="absolute -right-10 bottom-16 hidden h-52 w-52 overflow-hidden rounded-full opacity-40 shadow-xl ring-4 ring-autumn-50/70 lg:block"
+          animate={{ y: [0, -18, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 9, repeat: Infinity, delay: 0.4 }}
+        >
+          <Image
+            src={portfolioData.decorativeImages.skills[1]}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <motion.div
+          className="text-center mb-10 md:mb-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -60,71 +88,65 @@ export function Portfolio() {
           </motion.p>
         </motion.div>
 
-        {/* Asymmetrical Masonry Grid */}
+        {/* Editorial Portfolio Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-[1.25fr_0.875fr_0.875fr] lg:gap-7"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {portfolioData.portfolio.map((work, index) => (
-            <motion.div
-              key={work.id}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group ${
-                index === 0 ? 'lg:col-span-1 lg:row-span-2' : ''
-              }`}
-              variants={itemVariants}
-              layoutId={`portfolio-${work.id}`}
-              onClick={() => setSelectedId(work.id)}
-              whileHover={{ scale: 0.98 }}
-            >
-              {/* Parallax Container */}
+          {portfolioData.portfolio.map((work, index) => {
+            const isLead = index === 0;
+
+            return (
               <motion.div
-                className="relative w-full h-80 md:h-96 lg:h-full overflow-hidden"
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: 0.4 }}
+                key={work.id}
+                className={`group relative h-[320px] overflow-hidden rounded-[2rem] bg-autumn-brown shadow-xl shadow-autumn-brown/20 ring-1 ring-white/50 cursor-pointer md:h-[420px] lg:h-[520px] ${
+                  index === 2 ? 'md:col-span-2 lg:col-span-1' : ''
+                }`}
+                variants={itemVariants}
+                layoutId={`portfolio-${work.id}`}
+                onClick={() => setSelectedId(work.id)}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.35 }}
               >
                 <Image
                   src={work.image}
                   alt={work.title}
                   fill
-                  className="object-cover"
+                  sizes={
+                    isLead
+                      ? '(min-width: 1024px) 42vw, (min-width: 768px) 50vw, 100vw'
+                      : '(min-width: 1024px) 29vw, (min-width: 768px) 50vw, 100vw'
+                  }
+                  priority={isLead}
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
 
-                {/* Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-autumn-brown/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                >
-                  <div>
-                    <h3 className="text-white text-xl font-bold mb-1">
-                      {work.title}
-                    </h3>
-                    <p className="text-autumn-100 text-sm">{work.category}</p>
-                  </div>
-                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3B2E28]/75 via-[#3B2E28]/20 to-transparent" />
+                <div className="absolute inset-0 bg-autumn-orange/0 transition-colors duration-500 group-hover:bg-autumn-orange/10" />
 
-                {/* Hover Icon */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                >
-                  <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                    <span className="text-autumn-orange text-2xl font-bold">+</span>
-                  </div>
-                </motion.div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-autumn-100">
+                    Featured Work
+                  </p>
+                  <h3 className="text-2xl font-semibold text-white md:text-3xl">
+                    {work.title}
+                  </h3>
+                  <p className="mt-2 text-sm font-medium text-autumn-100">
+                    {work.category}
+                  </p>
+                </div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
 
       {/* Lightbox Modal */}
       <AnimatePresence>
-        {selectedId && (
+        {selectedWork && (
           <motion.div
             className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
@@ -133,24 +155,20 @@ export function Portfolio() {
             onClick={() => setSelectedId(null)}
           >
             <motion.div
-              className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden"
+              className="relative h-[78vh] max-h-[760px] w-full max-w-6xl overflow-hidden rounded-[2rem] bg-autumn-brown"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: 'spring', damping: 30 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {portfolioData.portfolio
-                .filter((work) => work.id === selectedId)
-                .map((work) => (
-                  <Image
-                    key={work.id}
-                    src={work.image}
-                    alt={work.title}
-                    fill
-                    className="object-cover"
-                  />
-                ))}
+              <Image
+                src={selectedWork.image}
+                alt={selectedWork.title}
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
 
               <motion.button
                 className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full transition-colors"
@@ -168,14 +186,10 @@ export function Portfolio() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                {portfolioData.portfolio
-                  .filter((work) => work.id === selectedId)
-                  .map((work) => (
-                    <div key={work.id}>
-                      <h3 className="text-2xl font-bold mb-1">{work.title}</h3>
-                      <p className="text-autumn-100">{work.category}</p>
-                    </div>
-                  ))}
+                <div>
+                  <h3 className="text-2xl font-bold mb-1">{selectedWork.title}</h3>
+                  <p className="text-autumn-100">{selectedWork.category}</p>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>

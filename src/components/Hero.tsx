@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
+import { portfolioData } from '@/data/portfolio';
 
 export function Hero() {
   const containerVariants = {
@@ -28,9 +29,38 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-autumn-50 flex items-center justify-center pt-20 pb-12 px-4"
+      className="min-h-screen bg-autumn-50 flex items-center justify-center pt-20 pb-12 px-4 relative overflow-hidden"
     >
-      <div className="max-w-7xl w-full">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute left-4 top-24 h-28 w-28 overflow-hidden rounded-full opacity-55 shadow-xl ring-4 ring-autumn-100/70 sm:h-40 sm:w-40 md:left-10 md:top-28"
+          animate={{ y: [0, 18, 0], rotate: [0, 4, 0] }}
+          transition={{ duration: 6, repeat: Infinity }}
+        >
+          <Image
+            src={portfolioData.decorativeImages.hero[0]}
+            alt=""
+            width={160}
+            height={160}
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-24 right-3 h-32 w-24 overflow-hidden rounded-3xl opacity-45 shadow-xl ring-4 ring-white/50 sm:right-8 sm:h-48 sm:w-36 lg:right-20"
+          animate={{ y: [0, -16, 0], rotate: [0, -3, 0] }}
+          transition={{ duration: 7, repeat: Infinity, delay: 0.6 }}
+        >
+          <Image
+            src={portfolioData.decorativeImages.hero[1]}
+            alt=""
+            width={144}
+            height={192}
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
+      </div>
+
+      <div className="max-w-7xl w-full relative z-10">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center"
           variants={containerVariants}

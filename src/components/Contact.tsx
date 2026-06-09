@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Link as LinkIcon, Mail, ExternalLink } from 'lucide-react';
+import { Link as LinkIcon, Mail, ExternalLink } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 const socialIcons = {
@@ -55,7 +55,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 md:py-32 bg-autumn-50 px-4 sm:px-6 lg:px-8"
+      className="py-20 md:py-24 bg-autumn-50 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -79,7 +79,7 @@ export function Contact() {
             className="mt-6 text-lg text-autumn-brown/70"
             variants={itemVariants}
           >
-            Let's collaborate on something creative
+            Let&apos;s collaborate on something creative
           </motion.p>
         </motion.div>
 
